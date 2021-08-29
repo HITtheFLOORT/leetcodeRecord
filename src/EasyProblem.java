@@ -51,7 +51,7 @@ public class EasyProblem {
         }
         return ret;
     }
-    /*
+
 public class ListNode {
     int val;
     ListNode next = null;
@@ -59,7 +59,7 @@ public class ListNode {
     ListNode(int val) {
         this.val = val;
     }
-}*/
+}
     public ListNode ReverseList(ListNode head) {
         ListNode pre=null;
         ListNode cur=head;
@@ -114,18 +114,18 @@ public class ListNode {
         }
         return slow;
     }
-    public TreeNode increasingBST(TreeNode root) {
-        List<Integer> res = new ArrayList<Integer>();
-        inorder(root, res);
-
-        TreeNode dummyNode = new TreeNode(-1);
-        TreeNode currNode = dummyNode;
-        for (int value : res) {
-            currNode.right = new TreeNode(value);
-            currNode = currNode.right;
-        }
-        return dummyNode.right;
-    }
+//    public TreeNode increasingBST(TreeNode root) {
+//        List<Integer> res = new ArrayList<Integer>();
+//        inorder(root, res);
+//
+//        TreeNode dummyNode = new TreeNode(-1);
+//        TreeNode currNode = dummyNode;
+//        for (int value : res) {
+//            currNode.right = new TreeNode(value);
+//            currNode = currNode.right;
+//        }
+//        return dummyNode.right;
+//    }
 
     public void inorder(TreeNode node, List<Integer> res) {
         if (node == null) {
@@ -484,9 +484,30 @@ public class ListNode {
 
         return Arrays.stream(nums).distinct().count() < nums.length;
     }
+    public int sumOddLengthSubarrays(int[] arr) {
+        int n=arr.length;
+        int sum[]=new int [n];
+        sum[0]=arr[0];
+        int ans=0;
+        for(int i=1;i<n;i++){
+            sum[i]=arr[i]+sum[i-1];
+        }
+        int len=1;
+        while(len<=n){
+            for(int i=0;i+len-1<n;i++){
+                if(i==0){
+                    ans+=sum[i+len-1];
+                }else{
+                    ans+=sum[i+len-1]-sum[i-1];
+                }
+            }
+            len+=2;
+        }
+        return ans;
+    }
 }
 class Employee {
     public int id;
     public int importance;
     public List<Integer> subordinates;
-};
+}
