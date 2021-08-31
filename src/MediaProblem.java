@@ -1294,4 +1294,45 @@ public class MediaProblem {
         }
         return ans;
     }
+    public String kthLargestNumber(String[] nums, int k) {
+        PriorityQueue<String> q=new PriorityQueue<>(new Comparator<String>() {
+            @Override
+            public int compare(String a, String b) {
+                if(a.length()!=b.length()){
+                    return a.length()-b.length();
+                }else{
+                    int n=a.length(),index=0;
+                    while(index<n){
+                        if(a.charAt(index)!=b.charAt(index)){
+                            return a.charAt(index)-b.charAt(index);
+                        }else{
+                            index++;
+                        }
+                    }
+                }
+                return 0;
+            }
+        });
+        for(int i=0;i<nums.length;i++){
+            q.add((nums[i]));
+        }
+        String sb=new String();
+        for(int i=0;i<k;i++){
+            sb=q.poll();
+        }
+        return sb;
+    }
+    public int[] corpFlightBookings(int[][] bookings, int n) {
+        int answer[]=new int [n];
+        int count[]=new int[n+1];
+        for(int i=0;i<bookings.length;i++){
+            count[bookings[i][0]-1]+=bookings[i][2];
+            count[bookings[i][1]]-=bookings[i][2];
+        }
+        answer[0]=count[0];
+        for(int i=1;i<answer.length;i++){
+            answer[i]=answer[i-1]+count[i];
+        }
+        return answer;
+    }
 }
