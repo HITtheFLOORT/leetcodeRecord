@@ -1195,32 +1195,6 @@ public class MediaProblem {
         }
         return ls.next;
     }
-    public int compareVersion(String version1, String version2) {
-        String s[]=version1.split("\\.");
-        String s2[]=version2.split("\\.");
-        int n=s.length<s2.length?s.length:s2.length;
-        for(int i=0;i<n;i++){
-            if(Integer.parseInt(s[i])<Integer.parseInt(s2[i])){
-                return -1;
-            }else if(Integer.parseInt(s[i])>Integer.parseInt(s2[i])){
-                return 1;
-            }
-        }
-        if(s.length>n){
-            for(int i=n;i<s.length;i++){
-                if(Integer.parseInt(s[i])>0){
-                        return 1;
-                }
-            }
-        }else{
-            for(int i=n;i<s2.length;i++){
-                if(Integer.parseInt(s2[i])>0){
-                    return -1;
-                }
-            }
-        }
-        return 0;
-    }
     public ListNode partition(ListNode head, int x) {
         if(head==null){
             return head;
@@ -1334,5 +1308,68 @@ public class MediaProblem {
             answer[i]=answer[i-1]+count[i];
         }
         return answer;
+    }
+    public int compareVersion(String version1, String version2) {
+        String a[]=version1.split("\\.");
+        String b[]=version2.split("\\.");
+        for(int i=0;i<Math.min(a.length,b.length);i++){
+            if(Integer.parseInt(a[i])>Integer.parseInt(b[i])){
+                return 1;
+            }else if(Integer.parseInt(a[i])<Integer.parseInt(b[i])){
+                return -1;
+            }
+        }
+        if(a.length<b.length){
+            for(int i=a.length;i<b.length;i++){
+                if(Integer.parseInt(b[i])>0) {
+                    return -1;
+                }
+            }
+        }else if(a.length>b.length){
+            for(int i=b.length;i<a.length;i++){
+                if(Integer.parseInt(a[i])>0) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        ListNode fist=head;
+        ListNode secd=head;
+        while(k-->0&&secd!=null){
+            secd=secd.next;
+        }
+        while(secd!=null){
+            fist=fist.next;
+            secd=secd.next;
+        }
+        return fist;
+    }
+    public List<TreeNode> generateTrees(int n) {
+        if(n==0){
+            return new LinkedList<>();
+        }
+        return GT(1,n);
+    }
+    public List<TreeNode> GT(int start,int end){
+        List<TreeNode> alltrees=new LinkedList<>();
+        if(start>end){
+            alltrees.add(null);
+            return alltrees;
+        }
+        for(int i=start;i<=end;i++){
+            List<TreeNode> left=GT(start,i-1);
+            List<TreeNode> right=GT(i+1,end);
+            for(TreeNode lef:left){
+                for(TreeNode rig:right){
+                    TreeNode curtree=new TreeNode(i);
+                    curtree.left=lef;
+                    curtree.right=rig;
+                    alltrees.add(curtree);
+                }
+            }
+        }
+        return alltrees;
     }
 }

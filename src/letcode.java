@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 public class letcode {
     public static void main(String[] args) throws Exception {
-
+        System.out.println(Integer.parseInt("001"));
+        System.out.println(Integer.parseInt("1"));
   }
 }
