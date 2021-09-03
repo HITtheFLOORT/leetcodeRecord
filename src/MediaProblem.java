@@ -1372,4 +1372,42 @@ public class MediaProblem {
         }
         return alltrees;
     }
+    public int[] smallestK(int[] arr, int k) {
+        int ans[]=new int[k];
+        quicksort(arr,0,arr.length-1,k);
+        if(arr.length==0||k==0){
+            return ans;
+        }else{
+            System.arraycopy(arr,0,ans,0,k);
+            return ans;
+        }
+    }
+    private void quicksort(int arr[],int l,int r,int k){
+        if(l>r){
+            return;
+        }
+        int tmp=arr[l];
+        int left=l;
+        int right=r;
+        while(left<right){
+            while(left<right&&arr[right]>=tmp){
+                right--;
+            }
+            while(left<right&&arr[left]<=tmp){
+                left++;
+            }
+            if(left<right){
+                int x=arr[right];
+                arr[right]=arr[left];
+                arr[left]=x;
+            }
+        }
+        arr[l]=arr[left];
+        arr[left]=tmp;
+        if(left>k-1){
+            quicksort(arr,l,left-1,k);
+        }else if(left<k-1){
+            quicksort(arr,left+1,r,k);
+        }
+    }
 }

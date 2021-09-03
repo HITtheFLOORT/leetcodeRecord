@@ -7,7 +7,6 @@ import java.util.TreeSet;
 
 public class letcode {
     public static void main(String[] args) throws Exception {
-        System.out.println(Integer.parseInt("001"));
-        System.out.println(Integer.parseInt("1"));
+        System.out.println(new MediaProblem().smallestK(new int[]{1,3,5,7,2,4,6,8},4));
   }
 }
