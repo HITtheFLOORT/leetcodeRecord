@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public class Easy {
@@ -112,4 +113,39 @@ public class Easy {
         }
         return min;
     }
+    public int fib(int n) {
+        final int MOD = 1000000007;
+        if (n < 2) {
+            return n;
+        }
+        int p = 0, q = 0, r = 1;
+        for (int i = 2; i <= n; ++i) {
+            p = q;
+            q = r;
+            r = (p + q) % MOD;
+        }
+        return r;
+    }
+    public int translateNum(int num) {
+        char s[]=(num+"").toCharArray();
+        if(s.length<2){
+            return s.length;
+        }
+        int p = 0, q = 1, r = ispreillegal(s,0)?2:1;
+        for (int i = 2; i < s.length; ++i) {
+            p = q;
+            q = r;
+            r = ispreillegal(s,i-1)?(p + q):q;
+        }
+        return r;
+    }
+    private boolean ispreillegal(char num[],int i){
+        int a=(num[i]-'0')*10+(num[i+1]-'0');
+        if(a<=25&&a>=10){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
