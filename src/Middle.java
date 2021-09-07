@@ -281,6 +281,22 @@ public class Middle {
         }
         return ans == INF ? -1 : ans;
     }
-
-
+    boolean isValidflag=true;
+    public boolean isValidBST(TreeNode root) {
+        Deque<TreeNode> de=new LinkedList<>();
+        double inorder=-Double.MAX_VALUE;
+        while(!de.isEmpty()||root!=null){
+            while(root!=null){
+                de.push(root);
+                root=root.left;
+            }
+            root=de.pop();
+            if(root.val<=inorder){
+                return false;
+            }
+            inorder= root.val;
+            root=root.right;
+        }
+        return true;
+    }
 }
