@@ -299,4 +299,69 @@ public class Middle {
         }
         return true;
     }
+    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
+        int n=profits.length;
+        int curr=0;
+        int arr[][]=new int[n][2];
+        for(int i=0;i<n;i++){
+            arr[i][0]=capital[i];
+            arr[i][1]=profits[i];
+        }
+        Arrays.sort(arr,(a,b)->a[0]-b[0]);
+        PriorityQueue<Integer> qu=new PriorityQueue<>((a,b)->b-a);
+        for(int i=0;i<k;++i){
+            while(curr<n&&arr[curr][0]<=w){
+                qu.add(arr[curr][1]);
+                curr++;
+            }
+            if(!qu.isEmpty()){
+                w+=qu.poll();
+            }else{
+                break;
+            }
+        }
+        return w;
+    }
+    public void recoverTree(TreeNode root){
+        List<Integer> nums=new ArrayList<>();
+        inorder(root,nums);
+        int []ans=findTwo(nums);
+        recover(root,2,ans[0],ans[1]);
+    }
+    public void inorder(TreeNode root,List<Integer> nums){
+        if(root==null){
+            return;
+        }
+        inorder(root.left,nums);
+        nums.add(root.val);
+        inorder(root.right,nums);
+    }
+    public int[] findTwo(List<Integer> nums){
+        int n=nums.size();
+        int index1=-1,index2=-1;
+        for(int i=0;i<n-1;i++){
+            if(nums.get(i+1)<nums.get(i)){
+                index2=i+1;
+                if(index1==-1){
+                    index1=i;
+                }else{
+                    break;
+                }
+            }
+        }
+        int x=nums.get(index1),y= nums.get(index2);
+        return new int[]{x,y};
+    }
+    public void recover(TreeNode root,int count,int x,int y){
+        if(root!=null){
+            if(root.val==x||root.val==y){
+                root.val=root.val==x?y:x;
+                if(--count==0){
+                    return;
+                }
+            }
+            recover(root.right,count,y,x);
+            recover(root.left,count,x,y);
+        }
+    }
 }
