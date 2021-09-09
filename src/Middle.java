@@ -364,4 +364,75 @@ public class Middle {
             recover(root.left,count,x,y);
         }
     }
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> ans=new ArrayList<>();
+        int len=0;
+        int index=0;
+        int kong=0;
+        int klen=maxWidth;
+        while(index<words.length){
+            List<String> tmp=new ArrayList<>();
+            while(index<words.length&&len<maxWidth){
+                if(words[index].length()+len+1<=maxWidth){
+                    len+=words[index].length()+1;
+                    tmp.add(words[index]);
+                    kong++;
+                    klen-=words[index].length();
+                    index++;
+                }else{
+                    len+=words[index].length()+1;
+                }
+            }
+            StringBuffer sb=new StringBuffer(tmp.get(0));
+            kong=kong>0?kong-1:0;
+            if(kong!=0&&klen%kong!=0){
+                sb.append(" ");
+            }else if(kong==0){
+                sb.append(sbnum(klen));
+            }
+            for(int i=1;i<tmp.size();i++){
+                sb.append(sbnum(klen/kong));
+                sb.append(tmp.get(i));
+            }
+            ans.add(sb.toString());
+            len=0;
+            kong=0;
+            klen=maxWidth;
+        }
+        return ans;
+
+    }
+    private  StringBuffer sbnum(int a){
+        StringBuffer ans=new StringBuffer();
+        for(int i=0;i<a;i++){
+            ans.append(" ");
+        }
+        return ans;
+    }
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ls=new ArrayList<>();
+        Deque<TreeNode> de=new LinkedList<>();
+        if(root!=null){
+            de.add(root);
+        }else {
+            return ls;
+        }
+        while(!de.isEmpty()){
+            int layersize=de.size();
+            List<Integer> layer=new ArrayList<>();
+            while(layersize-->0){
+                TreeNode tmp=de.pollFirst();
+                layer.add(tmp.val);
+                if(tmp.left!=null){
+                    de.add(tmp.left);
+                }
+                if(tmp.right!=null){
+                    de.add(tmp.right);
+                }
+            }
+            ls.add(layer);
+        }
+        return ls;
+    }
+
 }
