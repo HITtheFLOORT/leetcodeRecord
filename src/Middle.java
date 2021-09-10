@@ -434,5 +434,29 @@ public class Middle {
         }
         return ls;
     }
-
+    public int chalkReplacer(int[] chalk, int k) {
+        int sum[]=new int[chalk.length];
+        for(int i=0;i<sum.length;i++){
+            if(i==0){
+                sum[i]=chalk[i];
+            }else{
+                sum[i]=sum[i-1]+chalk[i];
+            }
+            if (sum[i] > k) {
+                return i;
+            }
+        }
+        k%=sum[sum.length-1];
+        int l=0;
+        int r=sum.length-1;
+        while(l<r){
+            int mid=(l+(r-l))/2;
+            if(sum[mid]<=k){
+                l=mid+1;
+            }else{
+                r=mid;
+            }
+        }
+        return l;
+    }
 }
