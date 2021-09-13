@@ -459,4 +459,66 @@ public class Middle {
         }
         return l;
     }
+    public int findIntegers(int n) {
+        int pos=1;
+        while((n>>pos)>0){
+            pos++;
+        }
+        int tmp=0;
+        int p=1;
+        int q=2;
+        if(pos<2){
+           return pos+1;
+        }
+        for(int i=2;i<=5;i++){
+            tmp=p;
+            p=q;
+            q=tmp+p;
+        }
+        return q;
+    }
+    public int minimumSwitchingTimes(int[][] source, int[][] target) {
+        int n[]=new int[10000];
+        for(int i=0;i<source.length;i++){
+            for(int j=0;j<source[0].length;j++){
+                n[source[i][j]]++;
+                n[target[i][j]]--;
+            }
+        }
+        int ans=0;
+        for(int i=0;i<n.length;i++){
+            if(n[i]!=0)
+            {ans+=Math.abs(n[i]);}
+        }
+        return ans/2;
+    }
+    public int maxmiumScore(int[] cards, int cnt) {
+        int dp[][]=new int[cnt][cards.length];
+        for(int i=0;i<cards.length;i++){
+            dp[0][i]=cards[i];
+        }
+        for(int i=1;i<cnt;i++){
+            for(int j=0;j<cards.length;j++){
+                dp[i][j]=max(dp[i][j],dp[i-1][])
+            }
+        }
+    }
+    public int numberOfBoomerangs(int[][] points) {
+        int ans=0;
+        for(int []p:points){
+            Map<Integer,Integer> ma=new HashMap<>();
+            for(int []q:points){
+                int dis=(p[0]-q[0])*(p[0]-q[0])+(p[1]-q[1])*(p[1]-q[1]);
+                ma.put(dis,ma.getOrDefault(dis,0)+1);
+            }
+            for(Integer a:ma.values()){
+                ans+=a*(a-1);
+            }
+//            for(Map.Entry<Integer,Integer> entry:ma.entrySet()){
+//                int m=entry.getValue();
+//                ans+=m*(m-1);
+//            }
+        }
+        return ans;
+    }
 }
