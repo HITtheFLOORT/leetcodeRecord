@@ -492,17 +492,7 @@ public class Middle {
         }
         return ans/2;
     }
-    public int maxmiumScore(int[] cards, int cnt) {
-        int dp[][]=new int[cnt][cards.length];
-        for(int i=0;i<cards.length;i++){
-            dp[0][i]=cards[i];
-        }
-        for(int i=1;i<cnt;i++){
-            for(int j=0;j<cards.length;j++){
-                dp[i][j]=max(dp[i][j],dp[i-1][])
-            }
-        }
-    }
+
     public int numberOfBoomerangs(int[][] points) {
         int ans=0;
         for(int []p:points){
@@ -520,5 +510,32 @@ public class Middle {
 //            }
         }
         return ans;
+    }
+    public String findLongestWord(String s, List<String> dictionary) {
+        Collections.sort(dictionary, new Comparator<String>() {
+            @Override
+            public int compare(String a, String b) {
+                if(a.length()!=b.length()){
+                    return b.length()-a.length();
+                }else{
+                    return a.compareTo(b);
+                }
+            }
+        });
+
+        for(String word:dictionary){
+            int single=0;
+            int couple=0;
+            while(single<s.length()&&couple<word.length()){
+                if(s.charAt(single)==word.charAt(couple)){
+                    couple++;
+                }
+                single++;
+            }
+            if(couple==word.length()){
+                return word;
+            }
+        }
+        return "";
     }
 }
