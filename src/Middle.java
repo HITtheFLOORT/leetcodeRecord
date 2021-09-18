@@ -563,4 +563,89 @@ public class Middle {
             return nums[a]-nums[b];
         }
     }
+    public double findMedianSortedArrarys(int []A,int []B){
+        int m=A.length;
+        int n=B.length;
+        if(m>n){
+            return findMedianSortedArrarys(B,A);
+        }
+        int iMin=0,iMax=m;
+        while(iMin<=iMax){
+            int i=(iMin+iMax)/2;
+            int j=(m+n+1)/2-i;
+            if(j!=0&&i!=m&&B[j-1]>A[i]){
+                iMin=i+1;
+            }else if(i!=0&&j!=n&&A[i-1]>B[j]){
+                iMax=i-1;
+            }else{
+                int maxleft=0;
+                if(i==0){ maxleft=B[j-1];}
+                else if(j==0)maxleft=A[i-1];
+                else{maxleft=Math.max(A[i-1],B[j-1]);}
+                if((m+n)%2==1){return maxleft;}
+                int minright=0;
+                if(i==m){minright=B[j];}
+                else if(j==n){minright=A[i];}
+                else{minright=Math.min(B[j],A[i]);}
+                return (minright+maxleft)/2.0;
+            }
+        }
+        return 0.0;
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        int times=0;
+        ArrayList<Integer> arr=new ArrayList<>();
+        inorder(root,arr);
+        return arr.get(k-1);
+
+    }
+    public void inorder(TreeNode root,ArrayList<Integer> arr){
+        if(root==null){
+            return ;
+        }
+        inorder(root.left,arr);
+        arr.add(root.val);
+        inorder(root.right,arr);
+    }
+    public int evalRPN(String[] tokens) {
+        Deque<Integer> de=new LinkedList<>();
+        for(String s:tokens){
+            if(s.equals("+")||s.equals("-")||s.equals("/")||s.equals("*")){
+                int a=0,b=0;
+                if(!de.isEmpty()){
+                    b=de.pop();
+                }
+                if(!de.isEmpty()){
+                    a=de.pop();
+                }
+                switch (s){
+                    case "+":de.push(a+b);break;
+                    case "-":de.push(a-b);break;
+                    case "/":de.push(a/b);break;
+                    case "*":de.push(a*b);break;
+                }
+
+            }
+            else{
+                de.push(Integer.parseInt(s));
+            }
+        }
+        int ans=0;
+        if(!de.isEmpty()){
+            ans=de.pop();
+        }
+        return ans;
+    }
+    public String reverseWords(String s) {
+        String strs[]=s.split(" ");
+        StringBuffer sb=new StringBuffer();
+        for(int j=strs.length-1;j>=0;j--){
+            if(!strs[j].equals("")){
+                sb.append(j);
+                sb.append(" ");
+
+            }
+        }
+        return sb.substring(0,sb.length()).toString();
+    }
 }
