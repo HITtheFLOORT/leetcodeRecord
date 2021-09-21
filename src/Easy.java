@@ -196,4 +196,19 @@ public class Easy {
         }
         return true;
     }
+    public int lengthOfLastWord(String s) {
+        int r=-1;
+        for(int i=s.length()-1;i>0;i++){
+            if(r==-1&&s.charAt(i)!=' '){
+                r=i;
+            }
+            if(r!=-1&&s.charAt(i)==' '){
+                return r-i;
+            }
+            if(r!=-1&&i==0){
+                return r-i+1;
+            }
+        }
+        return 0;
+    }
 }
