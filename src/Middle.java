@@ -70,26 +70,7 @@ public class Middle {
             }
         }
     }
-    public int hIndex(int[] citations) {
-        int n=citations.length;
-        int count[]=new int[citations.length+1];
-        for(int i=0;i<citations.length;i++){
-            if (citations[i] >= n) {
-                count[n]++;
-            } else {
-                count[citations[i]]++;
-            }
-        }
-        int tot=0;
-        for (int i = n; i >= 0; i--) {
-            tot += count[i];
-            if (tot >= i) {
-                return i;
-            }
-        }
-        return 0;
 
-    }
     public int search(int[] nums, int target) {
         int left=0;
         int n=nums.length;
@@ -671,4 +652,5 @@ public class Middle {
         }
         return parts;
     }
+
 }
