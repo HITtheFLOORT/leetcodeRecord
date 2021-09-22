@@ -505,6 +505,7 @@ public class ListNode {
         }
         return ans;
     }
+
 }
 class Employee {
     public int id;
