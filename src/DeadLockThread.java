@@ -17,7 +17,17 @@ public class DeadLockThread extends Thread{
         this.lock1 = lock1;
         this.lock2 = lock2;
     }
+    public void triger_lock()throws Exception {
+        Lock lock1 = new Lock("[锁1]");
+        Lock lock2 = new Lock("[锁2]");
 
+        Thread thread1 = new DeadLockThread(lock1, lock2);
+        thread1.setName("<线程1>");
+        Thread thread2 = new DeadLockThread(lock2, lock1);
+        thread2.setName("<线程2>");
+        thread1.start();
+        thread2.start();
+    }
     @Override
     public void run() {
         synchronized (lock1) {
