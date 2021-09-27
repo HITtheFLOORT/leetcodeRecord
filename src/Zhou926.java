@@ -13,6 +13,6 @@ public class Zhou926 {
         }
     }
     public long gridGame(int[][] grid) {
-
+        return 1;
     }
 }
