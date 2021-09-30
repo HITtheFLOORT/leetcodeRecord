@@ -1,12 +1,11 @@
 package Solution201to300;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+
 //拓扑序列207 210
 public class Solution207 {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
+        PriorityQueue pq=new PriorityQueue();
         List<Integer> edges[]=new List[numCourses];
         int []indeg=new int[numCourses];
         for(int i=0;i<edges.length;i++){//初始化
