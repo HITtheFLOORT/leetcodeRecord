@@ -1,18 +1,26 @@
-import Solution101to200.Solution152;
-import Solution1to100.Solution38;
-import Solution201to300.Solution273;
-import Solution300plus.Solution371;
-import Solution300plus.Solution639;
+import java.util.Scanner;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.*;
-
-public class Leetcode {//5 5
-
-    public static void main(String[] args) {
-       System.out.println(31&-31);
+public class Leetcode {
+    public boolean isPerfectSquare(int num) {
+        int l=1,r=num/2;
+        while(l<=r){
+            int mid=l+(r-l)/2;
+            if(mid*mid==num){
+                return true;
+            }
+            if(mid*mid<num){
+                l=mid+1;
+            }else{
+                r=mid-1;
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args) throws InterruptedException {
+        TokenBucket tokenBucket = new TokenBucket(1D, 1);
+        for (int i=0; i<10; i++) {
+            System.out.println(tokenBucket.acquire(1));
+            Thread.sleep(500);
+        }
     }
 }
